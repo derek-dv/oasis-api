@@ -1,0 +1,12 @@
+{
+  "name": "oasis-api",
+  "version": "1.0.0",
+  "description": "A JavaScript proxy for the Oasis API. To be used onky in the browser.",
+  "main": "index.js",
+  "repository": "g",
+  "author": "Oasis team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.26.1"
+  }
+}
