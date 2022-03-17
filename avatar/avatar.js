@@ -5,7 +5,7 @@ import Auth from "../auth/auth.js";
 class Avatar {
   constructor() {
     if (localStorage.getItem("user")) {
-      let user = JSON.parse(localStorage.getItem("user")).user;
+      let user = JSON.parse(localStorage.getItem("user"));
       this.token = { jwtToken: user.jwtToken, refresh: user.refreshToken };
     }
     this.callLogin();
@@ -14,6 +14,8 @@ class Avatar {
     const credentials = JSON.parse(localStorage.getItem("login"));
     const auth = new Auth();
     await auth.login(credentials);
+    let user = JSON.parse(localStorage.getItem("user"));
+    this.token = { jwtToken: user.jwtToken, refresh: user.refreshToken };
   }
 
   async getAll(token = {}) {
@@ -52,6 +54,7 @@ class Avatar {
       headers: {
         Authorization: `Bearer ${token.jwtToken}`,
         Cookie: `refreshToken=${token.refresh}`,
+        "Content-Type": "application/json",
       },
     };
 
@@ -67,16 +70,17 @@ class Avatar {
   async update(id, data) {
     await this.callLogin();
 
-    data = JSON.stringify(data)
+    data = JSON.stringify(data);
 
     const config = {
       method: "post",
       url: `https://api.oasisplatform.world/api/avatar/Update/${id}`,
       headers: {
         Authorization: `Bearer ${this.token.jwtToken}`,
-        Cookie: `refreshToken=${token.refresh}`
+        Cookie: `refreshToken=${token.refresh}`,
+        "Content-Type": "application/json",
       },
-      data
+      data,
     };
 
     return axios(config)
@@ -97,6 +101,7 @@ class Avatar {
       url: `https://api.oasisplatform.world/api/avatar/${id}`,
       headers: {
         Authorization: `Bearer ${this.token.jwtToken}`,
+        "Content-Type": "application/json",
       },
     };
 
@@ -121,15 +126,15 @@ class Avatar {
     }
   ) {
     await this.callLogin();
-    data = JSON.stringify(data);
 
     const config = {
       method: "post",
       url: `https://api.oasisplatform.world/api/avatar/AddKarmaToAvatar/${id}`,
       headers: {
-        Authorization: `Bearer ${token.jwtToken}`,
-        Cookie: `refreshToken=${token.refresh}`,
+        Authorization: `Bearer ${this.token.jwtToken}`,
+        "Content-Type": "application/json",
       },
+      data,
     };
     return axios(config)
       .then(function (response) {
@@ -160,6 +165,7 @@ class Avatar {
       headers: {
         Authorization: `Bearer ${token.jwtToken}`,
         Cookie: `refreshToken=${token.refresh}`,
+        "Content-Type": "application/json",
       },
     };
     return axios(config)

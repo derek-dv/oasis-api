@@ -10,6 +10,14 @@ class Auth {
       };
     }
   }
+
+  getUser() {
+    if (localStorage.getItem("user")) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      return { error: false, data: user };
+    }
+    return { error: true, data: { message: "You are not logged in" } };
+  }
   signup(
     data = {
       title: "Mr",
@@ -63,7 +71,6 @@ class Auth {
         localStorage.setItem("user", sto);
         localStorage.setItem("login", data);
         console.log(sto);
-        console.log("Please use this in a browser");
         this.token = {
           jwtToken: res.data.result.avatar.jwtToken,
           refreshToken: res.data.result.avatar.refreshToken,
