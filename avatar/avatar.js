@@ -10,12 +10,14 @@ class Avatar {
     }
     this.callLogin();
   }
-  async callLogin() {
+  async callLogin(obj = this) {
     const credentials = JSON.parse(localStorage.getItem("login"));
     const auth = new Auth();
     await auth.login(credentials);
     let user = JSON.parse(localStorage.getItem("user"));
-    this.token = { jwtToken: user.jwtToken, refresh: user.refreshToken };
+    obj.token = { jwtToken: user.jwtToken, refresh: user.refreshToken };
+    console.log(obj);
+    return obj.token;
   }
 
   async getAll(token = {}) {
