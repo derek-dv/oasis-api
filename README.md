@@ -29,7 +29,8 @@ The Auth class handles the authentication of the oasis-api. It can be imported b
 
 To login use this code:
 
-``` import { Auth } from "oasis-api"
+```javascript 
+import { Auth } from "oasis-api"
 
 const oasisAuth = new Auth()
 
@@ -43,18 +44,19 @@ password: "testpass"
 
 For signup, use this code snippet:
 
-``` import { Auth } from "oasis-api"
+```javascript 
+import { Auth } from "oasis-api"
 
 const oasisAuth = new Auth()
 
 const data = await OasisAuth.signup({
-firstName: 'test',
-lastName: 'test',
-email: 'test@email.com',
-password: 'test',
-confirmPassword: 'test',
-acceptTerms: true,
-avatarType: "User",
-title: "Mr",
+    firstName: 'test',
+    lastName: 'test',
+    email: 'test@email.com',
+    password: 'test',
+    confirmPassword: 'test',
+    acceptTerms: true,
+    avatarType: "User",
+    title: "Mr",
 });
 ```
